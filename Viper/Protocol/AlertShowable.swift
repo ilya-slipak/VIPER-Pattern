@@ -8,12 +8,12 @@
 
 import UIKit
 
-protocol AlertProtocol: class {
+protocol AlertShowable: class {
     
     func showAlert(_ buttonOK: String, _ buttonCancel: String?, _ title: String?, _ message: String?, completion: (() -> Void)?)
 }
 
-extension AlertProtocol where Self: UIViewController {
+extension AlertShowable where Self: UIViewController {
     
     func showAlert(_ buttonOK: String, _ buttonCancel: String?, _ title: String?, _ message: String?, completion: (() -> Void)?) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)

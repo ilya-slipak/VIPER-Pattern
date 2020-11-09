@@ -16,6 +16,7 @@ protocol ValidationServiceProtocol: class {
 final class ValidationService: ValidationServiceProtocol {
     
     func emptyStringValidation(string: String) -> Bool {
+        
         return string.range(of: "^\\s*$", options: .regularExpression) != nil
     }
 }

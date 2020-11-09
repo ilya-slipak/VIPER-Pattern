@@ -10,27 +10,29 @@ import Foundation
 
 protocol RecipesPresenterProtocol: class {
     
-    // MARK: - Methods
+    // MARK: - Properties
+    var recipes: [Recipe] { get }
     
+    // MARK: - Methods
     func viewDidLoad()
     func searchAction(searchString: String)
-    
-    // MARK: - Properties
-    
-    var recipes: [Recipe] { get }
 }
 
 final class RecipesPresenter {
     
-    weak var view: (RecipesViewProtocol & AlertProtocol)!
+    // MARK: - Properties
+    
+    weak var view: (RecipesViewProtocol & AlertShowable)!
     var interactor: RecipesInteractorProtocol!
     var router: RecipesRouterProtocol!
     
     var recipes = [Recipe]()
     
-    init(view: RecipesViewProtocol & AlertProtocol) {
+    init(view: RecipesViewProtocol & AlertShowable) {
         self.view = view
     }
+    
+    // MARK: - Private Methods
     
     private func handleResult(result: ResponseResult<RecipesModel>) {
         switch result {
@@ -38,13 +40,13 @@ final class RecipesPresenter {
             recipes = recipesModel.recipes
             view.updateTableView()
         case .noInternet(let recipes):
-            if recipes.count > 0 {
-                updateRecipes(inputRecipes: Array(recipes))
-            } else {
+            
+            guard !recipes.isEmpty else {
                 view.showAlert("OK", nil, "No internet connection", nil, completion: nil)
+                return
             }
             updateRecipes(inputRecipes: Array(recipes))
-            self.view.updateTableView()
+            view.updateTableView()
         case .failure(let error):
             view.showAlert("OK", nil, error.localizedDescription, nil, completion: nil)
         }
@@ -100,9 +102,9 @@ final class RecipesPresenter {
     }
 }
 
+// MARK: - RecipesPresenterProtocol
+
 extension RecipesPresenter: RecipesPresenterProtocol {
-    
-    // MARK: - Methods
     
     func viewDidLoad() {
         
@@ -120,4 +122,3 @@ extension RecipesPresenter: RecipesPresenterProtocol {
         view.dismissKeyboard()
     }
 }
-

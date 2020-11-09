@@ -6,7 +6,6 @@
 //  Copyright © 2019 Ilya Slipak. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 protocol RecipesRouterProtocol: class {
@@ -20,5 +19,4 @@ final class RecipesRouter: RecipesRouterProtocol {
     init(viewController: RecipesViewController) {
         self.viewController = viewController
     }
-    
 }

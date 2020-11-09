@@ -16,6 +16,8 @@ protocol RecipesInteractorProtocol: class {
 
 final class RecipesInteractor {
     
+    // MARK: - Properties
+    
     weak var presenter: RecipesPresenterProtocol!
     var recipesService: RecipesServiceProtocol!
     var databaseService: DatabaseServiceProtocol!
@@ -26,9 +28,9 @@ final class RecipesInteractor {
     }
 }
 
+// MARK: - RecipesInteractorProtocol
+
 extension RecipesInteractor: RecipesInteractorProtocol {
-    
-    // MARK: - Methods
     
     func performGetRecipes(completion: @escaping RecipesModelCompletion) {
         recipesService.getRecipes(completion: completion)

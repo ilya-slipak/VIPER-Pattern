@@ -26,7 +26,7 @@ final class RecipesCell: UITableViewCell {
     func configure(recipesModel: Recipe) {
         
         
-        recipesTitle.text = recipesModel.title ?? "Empty title"
+        recipesTitle.text = recipesModel.title
         recipesDescription.text = recipesModel.ingredients
         setupImageView(stringUrl: recipesModel.thumbnail)
     }

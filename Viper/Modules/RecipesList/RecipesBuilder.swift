@@ -6,7 +6,6 @@
 //  Copyright © 2019 Ilya Slipak. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 protocol RecipesBuilderProtocol: class {
@@ -19,13 +18,6 @@ final class RecipesBuilder: RecipesBuilderProtocol {
     var presenter: RecipesPresenter!
     var interactor: RecipesInteractor!
     var router: RecipesRouter!
-
-   private func assembleServices() {
-    
-        interactor.validationService = ValidationService()
-        interactor.databaseService = DatabaseService()
-        interactor.recipesService = RecipesService()
-    }
     
     func configure(with viewController: RecipesViewController) {
         
@@ -38,5 +30,12 @@ final class RecipesBuilder: RecipesBuilderProtocol {
         presenter.router = router
         
         assembleServices()
+    }
+    
+    private func assembleServices() {
+        
+        interactor.validationService = ValidationService()
+        interactor.databaseService = DatabaseService()
+        interactor.recipesService = RecipesService()
     }
 }

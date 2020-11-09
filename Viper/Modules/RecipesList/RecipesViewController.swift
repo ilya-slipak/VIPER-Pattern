@@ -19,7 +19,7 @@ protocol RecipesViewProtocol: class {
     func dismissKeyboard()
 }
 
-final class RecipesViewController: UIViewController, AlertProtocol {
+final class RecipesViewController: UIViewController, AlertShowable {
     
     // MARK: - Outlets
     
@@ -76,6 +76,7 @@ extension RecipesViewController: SearchViewDelegate {
         guard let searchText = searchText else {
             return
         }
+        
         presenter.searchAction(searchString: searchText)
     }
 }
