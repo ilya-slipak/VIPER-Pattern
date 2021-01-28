@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SearchView" customModule="Viper" customModuleProvider="target">
             <connections>
-                <outlet property="leadingStackViewConstraint" destination="3it-DC-nXe" id="A6T-yt-YCE"/>
                 <outlet property="searchBarView" destination="dm6-4I-Aum" id="cLv-x5-Ito"/>
                 <outlet property="searchButton" destination="HNl-rp-SER" id="3Iu-fk-x5o"/>
                 <outlet property="searchTextField" destination="awS-Ir-Y3z" id="sFF-ah-ab5"/>
@@ -83,6 +81,7 @@
                     </constraints>
                 </view>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="fcD-fm-VMd" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="2cj-kS-qs5"/>
@@ -97,7 +96,6 @@
                 <constraint firstAttribute="trailing" secondItem="zxz-TJ-ps3" secondAttribute="trailing" id="wOh-9s-OOE"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <point key="canvasLocation" x="138.75" y="154.75352112676057"/>
         </view>
     </objects>

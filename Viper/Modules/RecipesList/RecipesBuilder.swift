@@ -35,7 +35,7 @@ final class RecipesBuilder: RecipesBuilderProtocol {
     private func assembleServices() {
         
         interactor.validationService = ValidationService()
-        interactor.databaseService = DatabaseService()
-        interactor.recipesService = RecipesService()
+        interactor.recipesDatabase = RecipeDatabase()
+        interactor.recipesService = RecipesAPIClient()
     }
 }

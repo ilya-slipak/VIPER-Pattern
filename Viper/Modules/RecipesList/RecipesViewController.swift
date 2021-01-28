@@ -41,7 +41,6 @@ final class RecipesViewController: UIViewController, AlertShowable {
         builder.configure(with: self)
         presenter.viewDidLoad()
     }
-    
 }
 
 // MARK: - UITableViewDataSource, UITableViewDelegate
@@ -55,10 +54,8 @@ extension RecipesViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: R.nib.recipesCell.identifier) as? RecipesCell else {
-            return UITableViewCell()
-        }
-        
+        let identifier = R.reuseIdentifier.recipesCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)!
         let recipe = self.presenter.recipes[indexPath.row]
         cell.configure(recipesModel: recipe)
         

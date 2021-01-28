@@ -13,23 +13,21 @@ protocol SearchViewDelegate: class {
 }
 
 final class SearchView: UIView {
-    weak var delegate: SearchViewDelegate?
+    
+    // MARK: - IBOutlet Properties
 
     @IBOutlet weak var searchBarView: UIView!
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var searchTextField: UITextField!
-
-    @IBOutlet weak var leadingStackViewConstraint: NSLayoutConstraint!
     
-    @IBAction func searchAction(_ sender: Any) {
-        delegate?.searchAction(searchText:self.searchTextField.text)
-    }
-    
-    var validationService: ValidationServiceProtocol = ValidationService()
+    // MARK: - Public Properties
+        
+    let validationService: ValidationServiceProtocol = ValidationService()
     let stackViewWidth: CGFloat = 75
     let leadingPadding: CGFloat = 8
+    weak var delegate: SearchViewDelegate?
     
-    var viewIsLoaded: Bool = false
+    // MARK: - Lifecycle Methods
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -38,45 +36,27 @@ final class SearchView: UIView {
         self.searchTextField.delegate = self
     }
     
+    // MARK: - Setup Methods
+    
     func setupView(delegate: SearchViewDelegate) {
         self.delegate = delegate
     }
     
-    //I tried to make a change in search position with one method, but something went wrong:)
-    func setupLeftContraint() {
-        self.leadingStackViewConstraint.constant = (self.searchBarView.frame.width - 100 - leadingPadding) / 2
-    }
+    // MARK: - Action Methods
     
-    private func updateLeftConstaint(isSearshState: Bool) {
-        if isSearshState {
-            self.leadingStackViewConstraint.constant = 8
-        } else {
-            self.leadingStackViewConstraint.constant = (self.searchBarView.frame.width - stackViewWidth - leadingPadding) / 2
-        }
-        UIView.animate(withDuration: 0.7) {
-            self.layoutIfNeeded()
-        }
+    @IBAction func searchAction(_ sender: Any) {
+        delegate?.searchAction(searchText:self.searchTextField.text)
     }
-    
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        if !viewIsLoaded {
-            self.setupLeftContraint()
-            self.viewIsLoaded = true
-        }
-    }
-        
 }
 
 extension SearchView: UITextFieldDelegate {
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.delegate?.searchAction(searchText: textField.text)
         return true
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        self.updateLeftConstaint(isSearshState: true)
         textField.text = ""
     }
     
@@ -85,9 +65,7 @@ extension SearchView: UITextFieldDelegate {
             return
         }
         if self.validationService.emptyStringValidation(string: text) {
-            self.updateLeftConstaint(isSearshState: false)
             textField.text = ""
         }
     }
-    
 }

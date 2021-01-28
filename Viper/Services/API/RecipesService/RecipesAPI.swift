@@ -11,8 +11,7 @@ import Moya
 
 enum RecipesAPI {
     
-    case getRecipes
-    case getSearchRecipes(searchString: String)
+    case getRecipes(searchString: String)
 }
 
 extension RecipesAPI: TargetType {
@@ -37,13 +36,13 @@ extension RecipesAPI: TargetType {
     
     var task: Task {
         switch self {
-        case .getRecipes:
-            let parameters: [String: Any] = ["i": "onions,garlic",
+        case .getRecipes(let searchString):
+            var parameters: [String: Any] = ["i": "onions,garlic",
                                              "q": "omelet",
                                              "p": 3]
-            return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
-        case .getSearchRecipes(let searchString):
-            let parameters: [String: Any] = ["q": searchString]
+            if !searchString.isEmpty {
+                parameters["q"] = searchString
+            }
             return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
         }
     }
@@ -53,5 +52,4 @@ extension RecipesAPI: TargetType {
             "Content-Type": "application/x-www-form-urlencoded",
             "Accept": "application/json"]
     }
-    
 }

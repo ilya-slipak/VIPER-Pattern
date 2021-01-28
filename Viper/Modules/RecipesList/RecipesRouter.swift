@@ -17,6 +17,7 @@ final class RecipesRouter: RecipesRouterProtocol {
     weak var viewController: RecipesViewController!
     
     init(viewController: RecipesViewController) {
+        
         self.viewController = viewController
     }
 }

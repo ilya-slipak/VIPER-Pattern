@@ -10,8 +10,9 @@ import Foundation
 
 protocol RecipesInteractorProtocol: class {
 
-    func performGetRecipes(completion: @escaping RecipesModelCompletion)
-    func performGetSearchRecipes(searchString: String, completion: @escaping RecipesModelCompletion)
+    func getRecipesFromAPI(searchString: String, completion: @escaping RecipesModelCompletion)
+    func getLocalRecipes(searchString: String) -> [Recipe]
+    func saveRecipes(recipes: [Recipe])
 }
 
 final class RecipesInteractor {
@@ -20,7 +21,7 @@ final class RecipesInteractor {
     
     weak var presenter: RecipesPresenterProtocol!
     var recipesService: RecipesServiceProtocol!
-    var databaseService: DatabaseServiceProtocol!
+    var recipesDatabase: RecipesDatabaseProtocol!
     var validationService: ValidationServiceProtocol!
     
     init(presenter: RecipesPresenterProtocol) {
@@ -32,16 +33,27 @@ final class RecipesInteractor {
 
 extension RecipesInteractor: RecipesInteractorProtocol {
     
-    func performGetRecipes(completion: @escaping RecipesModelCompletion) {
-        recipesService.getRecipes(completion: completion)
+    func getRecipesFromAPI(searchString: String, completion: @escaping RecipesModelCompletion) {
+        
+        guard !validationService.emptyStringValidation(string: searchString) else {
+            recipesService.getRecipes(searchString: "", completion: completion)
+            return
+        }
+        recipesService.getRecipes(searchString: searchString, completion: completion)
     }
     
-    func performGetSearchRecipes(searchString: String, completion: @escaping RecipesModelCompletion) {
+    func getLocalRecipes(searchString: String) -> [Recipe] {
         
-        if !validationService.emptyStringValidation(string: searchString) {
-            recipesService.getSearchRecipes(searchString: searchString, completion: completion)
-        } else {
-            recipesService.getRecipes(completion: completion)
+        guard !validationService.emptyStringValidation(string: searchString) else {
+            
+            return recipesDatabase.getRecipes(searchString: "")
         }
+        
+        return recipesDatabase.getRecipes(searchString: searchString)
+    }
+    
+    func saveRecipes(recipes: [Recipe]) {
+        
+        recipesDatabase.saveRecipes(recipes: recipes)
     }
 }

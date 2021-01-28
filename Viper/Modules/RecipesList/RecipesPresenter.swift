@@ -11,9 +11,11 @@ import Foundation
 protocol RecipesPresenterProtocol: class {
     
     // MARK: - Properties
+    
     var recipes: [Recipe] { get }
     
     // MARK: - Methods
+    
     func viewDidLoad()
     func searchAction(searchString: String)
 }
@@ -33,31 +35,7 @@ final class RecipesPresenter {
     }
     
     // MARK: - Private Methods
-    
-    private func handleResult(result: ResponseResult<RecipesModel>) {
-        switch result {
-        case .success(let recipesModel):
-            recipes = recipesModel.recipes
-            view.updateTableView()
-        case .noInternet(let recipes):
-            
-            guard !recipes.isEmpty else {
-                view.showAlert("OK", nil, "No internet connection", nil, completion: nil)
-                return
-            }
-            updateRecipes(inputRecipes: Array(recipes))
-            view.updateTableView()
-        case .failure(let error):
-            view.showAlert("OK", nil, error.localizedDescription, nil, completion: nil)
-        }
-    }
-    
-    private func updateRecipes(inputRecipes: [Recipe]) {
         
-        recipes.removeAll()
-        recipes = inputRecipes
-    }
-    
     private func reloadUI() {
         
         view.setupTableViewHiddenState(isHidden: true)
@@ -66,37 +44,41 @@ final class RecipesPresenter {
     
     private func checkIfDataSourceIsEmpty() {
         
-        if recipes.count == 0 {
-            view.setupTableViewHiddenState(isHidden: true)
-            view.setNoResultLabel(isHidden: false)
-        } else {
+        guard recipes.isEmpty else {
+            
             view.setupTableViewHiddenState(isHidden: false)
             view.setNoResultLabel(isHidden: true)
+            return
         }
+        
+        view.setupTableViewHiddenState(isHidden: true)
+        view.setNoResultLabel(isHidden: false)
     }
-    
-    private func getRecipes() {
+        
+    private func getRecipes(searchString: String) {
         
         reloadUI()
         view.dismissKeyboard()
         view.showSpinner()
-        interactor.performGetRecipes { [weak self] (result) in
+        interactor.getRecipesFromAPI(searchString: searchString) { [weak self] result in
+            
             guard let self = self else { return }
+            
             self.view.hideSpinner()
-            self.handleResult(result: result)
-            self.checkIfDataSourceIsEmpty()
-        }
-    }
-    
-    private func getSearchRecipes(searchString: String) {
-        
-        reloadUI()
-        view.dismissKeyboard()
-        view.showSpinner()
-        interactor.performGetSearchRecipes(searchString: searchString) { [weak self] (result) in
-            guard let self = self else { return }
-            self.view.hideSpinner()
-            self.handleResult(result: result)
+            switch result {
+            case .success(let recipesModel):
+                self.recipes = recipesModel.recipes
+                self.interactor.saveRecipes(recipes: self.recipes)
+            case .noInternet:
+                
+                self.recipes = self.interactor.getLocalRecipes(searchString: searchString)
+                if self.recipes.isEmpty {
+                    self.view.showAlert("OK", nil, "No internet connection", nil, completion: nil)
+                }
+            case .failure(let error):
+                self.view.showAlert("OK", nil, error.localizedDescription, nil, completion: nil)
+            }
+            self.view.updateTableView()
             self.checkIfDataSourceIsEmpty()
         }
     }
@@ -109,12 +91,12 @@ extension RecipesPresenter: RecipesPresenterProtocol {
     func viewDidLoad() {
         
         view.setupUI()
-        getRecipes()
+        getRecipes(searchString: "")
     }
     
     func searchAction(searchString: String) {
         
-        getSearchRecipes(searchString: searchString)
+        getRecipes(searchString: searchString)
     }
     
     func dismissKeyboardAction() {
