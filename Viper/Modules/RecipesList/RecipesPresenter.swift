@@ -12,12 +12,13 @@ protocol RecipesPresenterProtocol: class {
     
     // MARK: - Properties
     
-    var recipes: [Recipe] { get }
+    var recipesCount: Int { get }
     
     // MARK: - Methods
     
     func viewDidLoad()
-    func searchAction(searchString: String)
+    func searchAction(searchString: String?)
+    func getRecipe(at index: Int) -> Recipe
 }
 
 final class RecipesPresenter {
@@ -28,14 +29,14 @@ final class RecipesPresenter {
     var interactor: RecipesInteractorProtocol!
     var router: RecipesRouterProtocol!
     
-    var recipes = [Recipe]()
+    private var recipes = [Recipe]()
     
     init(view: RecipesViewProtocol & AlertShowable) {
         self.view = view
     }
     
     // MARK: - Private Methods
-        
+    
     private func reloadUI() {
         
         view.setupTableViewHiddenState(isHidden: true)
@@ -45,7 +46,6 @@ final class RecipesPresenter {
     private func checkIfDataSourceIsEmpty() {
         
         guard recipes.isEmpty else {
-            
             view.setupTableViewHiddenState(isHidden: false)
             view.setNoResultLabel(isHidden: true)
             return
@@ -54,7 +54,7 @@ final class RecipesPresenter {
         view.setupTableViewHiddenState(isHidden: true)
         view.setNoResultLabel(isHidden: false)
     }
-        
+    
     private func getRecipes(searchString: String) {
         
         reloadUI()
@@ -65,6 +65,7 @@ final class RecipesPresenter {
             guard let self = self else { return }
             
             self.view.hideSpinner()
+            
             switch result {
             case .success(let recipesModel):
                 self.recipes = recipesModel.recipes
@@ -88,19 +89,34 @@ final class RecipesPresenter {
 
 extension RecipesPresenter: RecipesPresenterProtocol {
     
+    // MARK: - Properties
+    
+    var recipesCount: Int {
+        
+        return recipes.count
+    }
+    
+    // MARK: - Methods
+    
     func viewDidLoad() {
         
         view.setupUI()
         getRecipes(searchString: "")
     }
     
-    func searchAction(searchString: String) {
+    func searchAction(searchString: String?) {
         
+        guard let searchString = searchString else { return }
         getRecipes(searchString: searchString)
     }
     
     func dismissKeyboardAction() {
         
         view.dismissKeyboard()
+    }
+    
+    func getRecipe(at index: Int) -> Recipe {
+        
+        return recipes[index]
     }
 }

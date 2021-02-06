@@ -8,18 +8,18 @@
 
 import UIKit
 
-protocol RecipesBuilderProtocol: class {
+protocol RecipesBuilderProtocol {
     
-    func configure(with viewController: RecipesViewController)
+    mutating func configure(with viewController: RecipesViewController)
 }
 
-final class RecipesBuilder: RecipesBuilderProtocol {
+struct RecipesBuilder: RecipesBuilderProtocol {
     
     var presenter: RecipesPresenter!
     var interactor: RecipesInteractor!
     var router: RecipesRouter!
     
-    func configure(with viewController: RecipesViewController) {
+    mutating func configure(with viewController: RecipesViewController) {
         
         presenter = RecipesPresenter(view: viewController)
         interactor = RecipesInteractor(presenter: presenter)

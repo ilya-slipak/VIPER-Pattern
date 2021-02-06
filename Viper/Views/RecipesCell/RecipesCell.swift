@@ -18,7 +18,8 @@ final class RecipesCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        recipesImageView.circleCornerRadius(height: recipesImageView.frame.height, widht: recipesImageView.frame.width)
+        recipesImageView.circleCornerRadius(height: recipesImageView.frame.height,
+                                            width: recipesImageView.frame.width)
         recipesImageView.layer.borderWidth = 0.77
         recipesImageView.layer.borderColor = UIColor.lightGray.cgColor
     }

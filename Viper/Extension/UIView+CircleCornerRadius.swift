@@ -9,9 +9,11 @@
 import UIKit
 
 extension UIView {
-    func circleCornerRadius(height: CGFloat, widht: CGFloat) {
-        let minValue = min(height, widht)
+    
+    func circleCornerRadius(height: CGFloat, width: CGFloat) {
+        
+        let minValue = min(height, width)
         let circleRadius = minValue / 2
-        self.layer.cornerRadius = circleRadius
+        layer.cornerRadius = circleRadius
     }
 }

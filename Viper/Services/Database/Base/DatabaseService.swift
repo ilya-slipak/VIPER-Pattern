@@ -40,10 +40,10 @@ extension DatabaseService: DatabaseServiceProtocol {
             do {
                 try realm.write {
                     realm.create(T.self, value: object, update: .all)
-                    print("SUCCESFULLY saved to databse")
+                    print("Saved to database")
                 }
             } catch {
-                print("FAIILED SAVE TO DATABASE \(error.localizedDescription)")
+                print("Failed to save to database \(error.localizedDescription)")
             }
         }
     }

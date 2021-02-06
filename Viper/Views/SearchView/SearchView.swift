@@ -31,7 +31,7 @@ final class SearchView: UIView {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.fromNib()
+        self.makeFromNib()
         self.searchBarView.layer.cornerRadius = 8
         self.searchTextField.delegate = self
     }

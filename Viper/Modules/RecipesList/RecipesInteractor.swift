@@ -9,7 +9,7 @@
 import Foundation
 
 protocol RecipesInteractorProtocol: class {
-
+    
     func getRecipesFromAPI(searchString: String, completion: @escaping RecipesModelCompletion)
     func getLocalRecipes(searchString: String) -> [Recipe]
     func saveRecipes(recipes: [Recipe])
