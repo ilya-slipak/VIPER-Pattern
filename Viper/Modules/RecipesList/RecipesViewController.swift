@@ -19,7 +19,7 @@ protocol RecipesViewProtocol: class {
     func dismissKeyboard()
 }
 
-final class RecipesViewController: UIViewController, AlertShowable {
+final class RecipesViewController: UIViewController, AlertPresentable {
     
     // MARK: - Outlets
     

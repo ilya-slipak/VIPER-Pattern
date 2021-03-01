@@ -25,13 +25,13 @@ final class RecipesPresenter {
     
     // MARK: - Properties
     
-    weak var view: (RecipesViewProtocol & AlertShowable)!
+    weak var view: (RecipesViewProtocol & AlertPresentable)!
     var interactor: RecipesInteractorProtocol!
     var router: RecipesRouterProtocol!
     
     private var recipes = [Recipe]()
     
-    init(view: RecipesViewProtocol & AlertShowable) {
+    init(view: RecipesViewProtocol & AlertPresentable) {
         self.view = view
     }
     

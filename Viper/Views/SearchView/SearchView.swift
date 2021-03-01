@@ -64,7 +64,7 @@ extension SearchView: UITextFieldDelegate {
         guard let text = textField.text else {
             return
         }
-        if self.validationService.emptyStringValidation(string: text) {
+        if self.validationService.isEmpty(string: text) {
             textField.text = ""
         }
     }

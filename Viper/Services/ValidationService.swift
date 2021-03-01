@@ -10,12 +10,12 @@ import Foundation
 
 protocol ValidationServiceProtocol: class {
     
-    func emptyStringValidation(string: String) -> Bool
+    func isEmpty(string: String) -> Bool
 }
 
 final class ValidationService: ValidationServiceProtocol {
     
-    func emptyStringValidation(string: String) -> Bool {
+    func isEmpty(string: String) -> Bool {
         
         return string.range(of: "^\\s*$", options: .regularExpression) != nil
     }

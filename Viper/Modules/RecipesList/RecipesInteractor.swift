@@ -35,7 +35,7 @@ extension RecipesInteractor: RecipesInteractorProtocol {
     
     func getRecipesFromAPI(searchString: String, completion: @escaping RecipesModelCompletion) {
         
-        guard !validationService.emptyStringValidation(string: searchString) else {
+        guard !validationService.isEmpty(string: searchString) else {
             recipesService.getRecipes(searchString: "", completion: completion)
             return
         }
@@ -44,7 +44,7 @@ extension RecipesInteractor: RecipesInteractorProtocol {
     
     func getLocalRecipes(searchString: String) -> [Recipe] {
         
-        guard !validationService.emptyStringValidation(string: searchString) else {
+        guard !validationService.isEmpty(string: searchString) else {
             
             return recipesDatabase.getRecipes(searchString: "")
         }

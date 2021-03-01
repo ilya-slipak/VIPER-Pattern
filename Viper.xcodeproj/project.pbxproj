@@ -16,7 +16,7 @@
 		05B2D3F72558976800FF5BB6 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B2D3F62558976800FF5BB6 /* R.generated.swift */; };
 		05FC628D25C2B39800C424DB /* RecipeDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FC628C25C2B39800C424DB /* RecipeDatabase.swift */; };
 		091EE54E2348F59C006E05DE /* UIView+CircleCornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091EE54D2348F59C006E05DE /* UIView+CircleCornerRadius.swift */; };
-		7982537F2347AF3E00A13DC2 /* AlertShowable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7982537E2347AF3E00A13DC2 /* AlertShowable.swift */; };
+		7982537F2347AF3E00A13DC2 /* AlertPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7982537E2347AF3E00A13DC2 /* AlertPresentable.swift */; };
 		79CC81EB234732BF001B26AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CC81EA234732BF001B26AC /* AppDelegate.swift */; };
 		79CC81ED234732BF001B26AC /* RecipesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CC81EC234732BF001B26AC /* RecipesViewController.swift */; };
 		79CC81F0234732BF001B26AC /* RecipesViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79CC81EE234732BF001B26AC /* RecipesViewController.storyboard */; };
@@ -47,7 +47,7 @@
 		091EE54D2348F59C006E05DE /* UIView+CircleCornerRadius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+CircleCornerRadius.swift"; sourceTree = "<group>"; };
 		1119086B800C5A941237E9ED /* Pods_Viper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Viper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		32A9F261BBA3DC7D1D4B600F /* Pods-Viper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Viper.release.xcconfig"; path = "Target Support Files/Pods-Viper/Pods-Viper.release.xcconfig"; sourceTree = "<group>"; };
-		7982537E2347AF3E00A13DC2 /* AlertShowable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertShowable.swift; sourceTree = "<group>"; };
+		7982537E2347AF3E00A13DC2 /* AlertPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresentable.swift; sourceTree = "<group>"; };
 		79CC81E7234732BF001B26AC /* Viper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Viper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79CC81EA234732BF001B26AC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		79CC81EC234732BF001B26AC /* RecipesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesViewController.swift; sourceTree = "<group>"; };
@@ -125,7 +125,7 @@
 		7982537D2347AF2E00A13DC2 /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
-				7982537E2347AF3E00A13DC2 /* AlertShowable.swift */,
+				7982537E2347AF3E00A13DC2 /* AlertPresentable.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -439,7 +439,7 @@
 				79CC825A234773E9001B26AC /* RecipesAPI.swift in Sources */,
 				79CC825C23477433001B26AC /* RecipesBuilder.swift in Sources */,
 				79CC8248234772B6001B26AC /* ValidationService.swift in Sources */,
-				7982537F2347AF3E00A13DC2 /* AlertShowable.swift in Sources */,
+				7982537F2347AF3E00A13DC2 /* AlertPresentable.swift in Sources */,
 				79CC826223477465001B26AC /* RecipesRouter.swift in Sources */,
 				79CC824A234772E3001B26AC /* UIView+FromNib.swift in Sources */,
 				79CC81EB234732BF001B26AC /* AppDelegate.swift in Sources */,
